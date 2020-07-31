@@ -10,12 +10,12 @@ package logicaNegocio;
  * @author vinil
  */
 public class Usuario {
-    
+
     private int cedula;
     private String contrasena;
-    
+
     public Usuario() {
-    
+
     }
 
     public int getCedula() {
@@ -33,5 +33,5 @@ public class Usuario {
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
     }
-    
+
 }

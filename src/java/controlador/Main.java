@@ -6,6 +6,8 @@
 package controlador;
 
 import com.opensymphony.xwork2.ActionSupport;
+import java.util.ArrayList;
+import java.util.List;
 import logicaNegocio.Usuario;
 
 /**
@@ -14,10 +16,40 @@ import logicaNegocio.Usuario;
  */
 public class Main extends ActionSupport {
     
-    Usuario usuario = new Usuario();
+    private Usuario usuario = new Usuario();
+    private List<String> usuarios;
+    private String cedula;
+    private String contrasena;
+    private String rolSeleccionado;
+    
+    public Main() {
+        usuarios = new ArrayList();
+        setUsuarios("Paciente");
+        setUsuarios("Funcionario");
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getUsuarios() {
+        String mensaje = "";
+        for(int i=0;i<usuarios.size();i++) {
+            mensaje += usuarios.get(i);
+        }
+        return mensaje;
+    }
+
+    public void setUsuarios(String usuario) {
+        usuarios.add(usuario);
+    }
     
     @Override
     public String execute() {
-        return null;
+        return SUCCESS;
     }
 }
