@@ -5,8 +5,12 @@
 <struts>
 
     <package name="default" extends="struts-default">
-        <action name="Main" class="controlador.Main" method="Main">
-            <result name="success">/vista/RegistroPaciente.jsp</result>
+        <action name="login">
+            <result>login.jsp</result>
+        </action>
+        <action name="loginprocess" class="com.javatpoint.Login">
+            <result name="success">loginsuccess.jsp</result>
+            <result name="error">loginerror.jsp</result>
         </action>
     </package>
 </struts>

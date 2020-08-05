@@ -5,8 +5,11 @@
  */
 package DAO;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import dao.Conexion;
+import java.sql.ResultSet;
 
 
 /**
@@ -15,20 +18,29 @@ import java.util.ArrayList;
  */
 public class UsuarioDAO {
     
-    private ArrayList listaUsername,listaContrasena;
-    private final Conexion con;
+    private ArrayList<String> listaUsername;
+    private ArrayList<String> listaContrasena;
+    private static Conexion con;
     
-    public UsuarioDAO() throws SQLException, ClassNotFoundException {
+    public static boolean existeUsuario (int cedula, String contrasena) 
+            throws SQLException, ClassNotFoundException{
         con = new Conexion();
+        PreparedStatement ps = con.getConnection().prepareStatement("select * "
+                + "from usuario where `cedula`=? and `contrasena`=?;");
+        ps.setInt(1, cedula);
+        ps.setString(2, contrasena);
+        ResultSet rs = ps.executeQuery();
+        return rs.next();
     }
     
-    public boolean iniciarSesion(int cedula, String contrasena) throws SQLException, ClassNotFoundException{
-        listaUsername = con.obtenerResultado("", "");
-        if(!listaUsername.isEmpty()){
-            return true;
-        }
-        else{
-            return false;
-        }
+    public static boolean existeRol (int cedula, String rol) throws SQLException, 
+            ClassNotFoundException {
+        con = new Conexion();
+        PreparedStatement ps = con.getConnection().prepareStatement("select "
+                + "* from " + rol + " where `cedula`=?;");
+        ps.setInt(1, cedula);
+        ResultSet rs = ps.executeQuery();
+        return rs.next();
     }
+    
 }
